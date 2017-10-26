@@ -22,7 +22,7 @@ import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.ContainerPage;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.ContainerPage.Field;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.ListTabbedPage;
 
-public class ContainerPageIT extends AbstractIT {
+public class SingleContainerPageIT extends AbstractIT {
 
   private static final Map<String, Long> idForPlatform;
   static {

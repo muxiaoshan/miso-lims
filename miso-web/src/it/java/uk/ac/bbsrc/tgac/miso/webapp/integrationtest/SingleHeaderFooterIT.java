@@ -7,7 +7,7 @@ import org.junit.Test;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.HeaderFooterPage;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.LoginPage;
 
-public class HeaderFooterIT extends AbstractIT {
+public class SingleHeaderFooterIT extends AbstractIT {
 
   @Test
   public void testVersion() {

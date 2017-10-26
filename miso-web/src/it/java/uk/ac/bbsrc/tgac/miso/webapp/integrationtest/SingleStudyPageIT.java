@@ -12,7 +12,7 @@ import org.junit.Test;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.StudyPage;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.StudyPage.Fields;
 
-public class StudyPageIT extends AbstractIT {
+public class SingleStudyPageIT extends AbstractIT {
 
   @Before
   public void setup() {

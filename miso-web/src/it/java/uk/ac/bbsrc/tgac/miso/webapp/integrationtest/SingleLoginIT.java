@@ -8,7 +8,7 @@ import org.junit.Test;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.HomePage;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.LoginPage;
 
-public class LoginIT extends AbstractIT {
+public class SingleLoginIT extends AbstractIT {
 
   private LoginPage page;
 

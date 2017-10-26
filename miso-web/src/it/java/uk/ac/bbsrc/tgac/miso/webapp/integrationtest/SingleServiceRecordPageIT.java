@@ -19,7 +19,7 @@ import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.SequencerPage;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.ServiceRecordPage;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.ServiceRecordPage.Field;
 
-public class ServiceRecordPageIT extends AbstractIT {
+public class SingleServiceRecordPageIT extends AbstractIT {
 
   @Before
   public void setup() {

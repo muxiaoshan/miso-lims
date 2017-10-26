@@ -36,6 +36,7 @@
   <name>MISO MVC</name>
   <properties>
     <skipITs>true</skipITs>
+    <singleOrBulk>Single</singleOrBulk>
     <cargoInitGoal>start</cargoInitGoal>
     <mysql.db>lims</mysql.db>
     <mysql.user>tgaclims</mysql.user>
@@ -660,6 +661,9 @@
                 <miso.it.mysql.pw>${mysql.pw}</miso.it.mysql.pw>
               </systemPropertyVariables>
               <skipTests>${skipITs}</skipTests>
+              <includes>
+                <include>**/${singleOrBulkITs}**IT.java</include> <!-- Split up Single and Bulk tests so Travis doesn't timeout -->
+              </includes>
               <excludes>
                 <exclude>**/PlainSampleITs.java</exclude>
               </excludes>

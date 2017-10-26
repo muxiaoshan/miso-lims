@@ -23,7 +23,7 @@ import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.dialog.AddNoteDialog;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.element.DataTable;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.element.Note;
 
-public class PoolPageIT extends AbstractIT {
+public class SinglePoolPageIT extends AbstractIT {
 
   @Before
   public void setup() {

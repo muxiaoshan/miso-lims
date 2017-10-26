@@ -8,8 +8,10 @@ env:
     - MAVEN_SETTINGS="${TRAVIS_BUILD_DIR}/gsi-config"
     - MAVEN_OPTS="-Xms1g -Xmx2g" 
   matrix: 
-    - PLAIN=true
-    - PLAIN=false
+    - SONAR=true
+    - SONAR=false PLAIN=true
+    - SONAR=false PLAIN=false SINGLE_OR_BULK="Single"
+    - SONAR=false PLAIN=false SINGLE_OR_BULK="Bulk"
 
 git:
   depth: 3
@@ -37,17 +39,21 @@ before_script:
   - sudo apt-get install -y pkg-config cmake libjsoncpp-dev autoconf libtool build-essential gcc-5 g++-5
 script:
   
-  - 'if ($PLAIN) ; then
-        mvn -P external clean verify -DrunPlainITs;
-     else
-        pushd runscanner-illumina && ./build-illumina-interop && autoreconf -i && ./configure && make && popd;
-        PATH=$PATH:$(pwd)/runscanner-illumina mvn clean -P external -Dmaven.javadoc.skip=true -DskipITs=false -DskipIllumina=false install;
-     fi'
-  - 'if [[ ${TRAVIS_PULL_REQUEST_SLUG} == ${TRAVIS_REPO_SLUG} ]] ; then 
-        mvn org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar ;
+  - 'if ($SONAR); then
+        if [[ ${TRAVIS_PULL_REQUEST_SLUG} == ${TRAVIS_REPO_SLUG} ]] ; then 
+            mvn org.jacoco:jacoco-maven-plugin:prepare-agent sonar:sonar ;
+        else 
+            echo "[WARN] SonarCloud cannot run on pull requests from forks." ; 
+        fi
      else 
-        echo "[WARN] SonarCloud cannot run on pull requests from forks." ; 
-     fi'
+        if ($PLAIN) ; then
+            mvn -P external clean verify -DrunPlainITs;
+        else
+            pushd runscanner-illumina && ./build-illumina-interop && autoreconf -i && ./configure && make && popd;
+            PATH=$PATH:$(pwd)/runscanner-illumina mvn clean -P external -Dmaven.javadoc.skip=true -DskipITs=false -DsingleOrBulkITs=${SINGLE_OR_BULK} -DskipIllumina=false install;
+        fi
+    fi'
+
 
 cache:
   directories:
