@@ -10,8 +10,7 @@ env:
   matrix: 
     - SONAR=true
     - SONAR=false PLAIN=true
-    - SONAR=false PLAIN=false SINGLE_OR_BULK="Single"
-    - SONAR=false PLAIN=false SINGLE_OR_BULK="Bulk"
+    - SONAR=false PLAIN=false
 
 git:
   depth: 3
@@ -50,7 +49,7 @@ script:
             mvn -P external clean verify -DrunPlainITs;
         else
             pushd runscanner-illumina && ./build-illumina-interop && autoreconf -i && ./configure && make && popd;
-            PATH=$PATH:$(pwd)/runscanner-illumina mvn clean -P external -Dmaven.javadoc.skip=true -DskipITs=false -DsingleOrBulkITs=${SINGLE_OR_BULK} -DskipIllumina=false install;
+            PATH=$PATH:$(pwd)/runscanner-illumina mvn clean -P external -Dmaven.javadoc.skip=true -DskipITs=false -DskipIllumina=false install;
         fi
     fi'
 
