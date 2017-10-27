@@ -9,8 +9,9 @@ env:
     - MAVEN_OPTS="-Xms1g -Xmx2g" 
   matrix: 
     - SONAR=true
-    - SONAR=false PLAIN=true
-    - SONAR=false PLAIN=false
+    - SONAR=false PLAIN=true TEST_PREFIX="Plain*"
+    - SONAR=false PLAIN=false TEST_PREFIX="Bulk*, !Single*"
+    - SONAR-false PLAIN=false TEST_PREFIX="Single*, !Bulk*"
 
 git:
   depth: 3
@@ -49,7 +50,7 @@ script:
             mvn -P external clean verify -DrunPlainITs;
         else
             pushd runscanner-illumina && ./build-illumina-interop && autoreconf -i && ./configure && make && popd;
-            PATH=$PATH:$(pwd)/runscanner-illumina mvn clean -P external -Dmaven.javadoc.skip=true -DskipITs=false -DskipIllumina=false install;
+            PATH=$PATH:$(pwd)/runscanner-illumina mvn clean -P external -Dmaven.javadoc.skip=true -DskipITs=false -Dit.test=${TEST_PREFIX} -DskipIllumina=false install;
         fi
     fi'
 
