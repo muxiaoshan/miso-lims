@@ -50,7 +50,7 @@ script:
             mvn -P external clean verify -DrunPlainITs;
         else
             pushd runscanner-illumina && ./build-illumina-interop && autoreconf -i && ./configure && make && popd;
-            PATH=$PATH:$(pwd)/runscanner-illumina mvn clean -P external -Dmaven.javadoc.skip=true -DskipITs=false -Dit.test=${TEST_PREFIX} -DskipIllumina=false install;
+            PATH=$PATH:$(pwd)/runscanner-illumina mvn clean -P external "-Dmaven.javadoc.skip=true -DskipITs=false -Dit.test=${TEST_PREFIX} -DskipIllumina=false" install;
         fi
     fi'
 
