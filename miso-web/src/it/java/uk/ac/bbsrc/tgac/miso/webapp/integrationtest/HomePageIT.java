@@ -10,7 +10,7 @@ import org.junit.Test;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.HomePage;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.ProjectPage;
 
-public class SingleHomePageIT extends AbstractIT {
+public class HomePageIT extends AbstractIT {
 
   private HomePage page;
 

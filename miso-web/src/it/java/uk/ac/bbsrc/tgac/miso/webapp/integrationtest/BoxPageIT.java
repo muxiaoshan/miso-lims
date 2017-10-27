@@ -18,7 +18,7 @@ import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.BoxPage;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.BoxPage.Field;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.BoxVisualization;
 
-public class SingleBoxPageIT extends AbstractIT {
+public class BoxPageIT extends AbstractIT {
 
   @Before
   public void setup() {

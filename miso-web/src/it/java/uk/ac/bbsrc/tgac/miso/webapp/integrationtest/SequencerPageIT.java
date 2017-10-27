@@ -17,7 +17,7 @@ import uk.ac.bbsrc.tgac.miso.core.data.impl.SequencerReferenceImpl;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.SequencerPage;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.SequencerPage.Field;
 
-public class SingleSequencerPageIT extends AbstractIT {
+public class SequencerPageIT extends AbstractIT {
 
   @Before
   public void setup() {

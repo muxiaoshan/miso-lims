@@ -9,9 +9,10 @@ env:
     - MAVEN_OPTS="-Xms1g -Xmx2g" 
   matrix: 
     - SONAR=true
-    - SONAR=false PLAIN=true TEST_PREFIX="Plain*"
-    - SONAR=false PLAIN=false TEST_PREFIX="Bulk*, !Single*"
-    - SONAR-false PLAIN=false TEST_PREFIX="Single*, !Bulk*"
+    - SONAR=true RUNSCANNER=true
+    - SONAR=false RUNSCANNER=false PLAIN=true TEST_PREFIX="Plain*"
+    - SONAR=false RUNSCANNER=false PLAIN=false TEST_PREFIX="Bulk*"
+    - SONAR-false RUNSCANNER=false PLAIN=false TEST_PREFIX="!Bulk*"
 
 git:
   depth: 3
@@ -45,12 +46,14 @@ script:
         else 
             echo "[WARN] SonarCloud cannot run on pull requests from forks." ; 
         fi
+     elif ($RUNSCANNER); then
+        pushd runscanner-illumina && ./build-illumina-interop && autoreconf -i && ./configure && make && popd;
+        PATH=$PATH:$(pwd)/runscanner-illumina mvn clean -P external -Dmaven.javadoc.skip=true -DskipIllumina=false install
      else 
         if ($PLAIN) ; then
             mvn -P external clean verify -DrunPlainITs;
         else
-            pushd runscanner-illumina && ./build-illumina-interop && autoreconf -i && ./configure && make && popd;
-            PATH=$PATH:$(pwd)/runscanner-illumina mvn clean -P external "-Dmaven.javadoc.skip=true -DskipITs=false -Dit.test=${TEST_PREFIX} -DskipIllumina=false" install;
+            mvn clean -P external "-Dmaven.javadoc.skip=true -DskipITs=false -Dit.test=${TEST_PREFIX}" install;
         fi
     fi'
 

@@ -28,7 +28,7 @@ import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.LibraryPage.Field;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.dialog.AddNoteDialog;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.element.Note;
 
-public class SingleLibraryPageIT extends AbstractIT {
+public class LibraryPageIT extends AbstractIT {
 
   @Before
   public void setup() {

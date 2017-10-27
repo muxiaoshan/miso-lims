@@ -27,7 +27,7 @@ import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.ProjectPage;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.ProjectPage.ProjectTable;
 import uk.ac.bbsrc.tgac.miso.webapp.integrationtest.page.element.DataTable;
 
-public class SingleListTablesIT extends AbstractIT {
+public class ListTablesIT extends AbstractIT {
 
   private static final Set<String> samplesColumns = Sets.newHashSet(Columns.SORT, Columns.NAME, Columns.ALIAS, Columns.SAMPLE_CLASS,
       Columns.SAMPLE_TYPE, Columns.QC_PASSED, Columns.LOCATION, Columns.LAST_MODIFIED);
