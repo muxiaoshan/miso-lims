@@ -646,10 +646,48 @@
             <artifactId>maven-failsafe-plugin</artifactId>
             <executions>
               <execution>
+                <id>runBulkITs</id>
                 <goals>
                   <goal>integration-test</goal>
                   <goal>verify</goal>
                 </goals>
+                <configuration>
+                  <skipTests>${runBulk}</skipTests>
+                  <!-- NOTE: for completely unknown reasons, this configuration RUNS ONLY the Bulk*IT.java tests.
+                       No, this does not make sense. And yet, here we are.
+                       This is mostly for use with Travis, where running all detailed sample tests at once
+                       times out. -->
+                  <excludes>
+                    <exclude>**/Bulk**IT.java</exclude>
+                  </excludes>
+                </configuration>
+              </execution>
+              <execution>
+                <id>runNonBulkITs</id>
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+                <configuration>
+                 <skipTests>${runNonBulk}</skipTests>
+                 <!-- NOTE: for completely unknown reasons, this configuration SKIPS ALL Bulk*IT.java tests.
+                      This is mostly for use with Travis, where running all detailed sample tests at once
+                      times out. -->
+                 <includes>
+                   <include>**/Bulk**IT.java</include>
+                 </includes>
+               </configuration>
+              </execution>
+              <execution>
+                <id>runAllDetailedITs</id>
+                <!-- Runs when no extra flags are provided. Will cause a Travis build to timeout. -->
+                <goals>
+                  <goal>integration-test</goal>
+                  <goal>verify</goal>
+                </goals>
+                <configuration>
+                  <skipTests>${skipITs}</skipTests>
+                </configuration>
               </execution>
             </executions>
             <configuration>
@@ -661,9 +699,6 @@
                 <miso.it.mysql.pw>${mysql.pw}</miso.it.mysql.pw>
               </systemPropertyVariables>
               <skipTests>${skipITs}</skipTests>
-              <includes>
-                <include>**/${singleOrBulkITs}**IT.java</include> <!-- Split up Single and Bulk tests so Travis doesn't timeout -->
-              </includes>
               <excludes>
                 <exclude>**/PlainSampleITs.java</exclude>
               </excludes>
