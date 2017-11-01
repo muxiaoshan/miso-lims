@@ -9,10 +9,10 @@ env:
     - MAVEN_OPTS="-Xms1g -Xmx2g" 
   matrix: 
     - SONAR=true
-    - SONAR=true RUNSCANNER=true
-    - SONAR=false RUNSCANNER=false PLAIN=true TEST_PREFIX="Plain*"
-    - SONAR=false RUNSCANNER=false PLAIN=false TEST_PREFIX="Bulk*"
-    - SONAR-false RUNSCANNER=false PLAIN=false TEST_PREFIX="!Bulk*"
+    - SONAR=false RUNSCANNER=true
+    - SONAR=false RUNSCANNER=false PLAIN=true TEST_PREFIX="Plain"
+    - SONAR=false RUNSCANNER=false PLAIN=false TEST_PREFIX="Bulk"
+    - SONAR-false RUNSCANNER=false PLAIN=false TEST_PREFIX="!Bulk"
 
 git:
   depth: 3
@@ -53,7 +53,7 @@ script:
         if ($PLAIN) ; then
             mvn -P external clean verify -DrunPlainITs;
         else
-            mvn clean -P external "-Dmaven.javadoc.skip=true -DskipITs=false -Dit.test=${TEST_PREFIX}" install;
+            mvn -P external clean verify -Dmaven.javadoc.skip=true -DskipITs=false -Dit.test="${TEST_PREFIX}"*;
         fi
     fi'
 
