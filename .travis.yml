@@ -12,7 +12,7 @@ env:
     - SONAR=false RUNSCANNER=true
     - SONAR=false RUNSCANNER=false PLAIN=true TEST_PREFIX="Plain"
     - SONAR=false RUNSCANNER=false PLAIN=false TEST_PREFIX="Bulk"
-    - SONAR-false RUNSCANNER=false PLAIN=false TEST_PREFIX="!Bulk"
+    - SONAR-false RUNSCANNER=false PLAIN=false TEST_PREFIX="\!Bulk"
 
 git:
   depth: 3
