@@ -52,11 +52,9 @@ script:
      elif ($PLAIN); then
         mvn -P external clean verify -DrunPlainITs;
      elif ($BULK_TESTS); then
-        echo "test prefix ${TEST_PREFIX}"*;
-        mvn -P external clean verify -Dmaven.javadoc.skip=true -DskipITs=false -Dit.test=Bulk*;
+        mvn -P external clean verify "-Dmaven.javadoc.skip=true -DskipITs=false -Dit.test=Bulk*";
      else
-        echo "test prefix ${TEST_PREFIX}"*;
-        mvn -P external clean verify -Dmaven.javadoc.skip=true -DskipITs=false -Dit.test=!Bulk*;
+        mvn -P external clean verify -Dmaven.javadoc.skip=true -DskipITs=false -Dit.test=!"Bulk*";
      fi'
 
 
