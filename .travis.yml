@@ -12,7 +12,7 @@ env:
     - SONAR=false RUNSCANNER=true
     - SONAR=false RUNSCANNER=false PLAIN=true TEST_PREFIX="Plain"
     - SONAR=false RUNSCANNER=false PLAIN=false TEST_PREFIX="Bulk"
-    - SONAR-false RUNSCANNER=false PLAIN=false TEST_PREFIX="\!Bulk"
+    - SONAR-false RUNSCANNER=false PLAIN=false TEST_PREFIX='!'"Bulk"
 
 git:
   depth: 3
@@ -53,6 +53,7 @@ script:
         if ($PLAIN) ; then
             mvn -P external clean verify -DrunPlainITs;
         else
+            echo "test prefix ${TEST_PREFIX}"*;
             mvn -P external clean verify -Dmaven.javadoc.skip=true -DskipITs=false -Dit.test="${TEST_PREFIX}"*;
         fi
     fi'
