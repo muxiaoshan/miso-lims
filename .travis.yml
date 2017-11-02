@@ -12,7 +12,7 @@ env:
     - SONAR=false RUNSCANNER=true
     - SONAR=false RUNSCANNER=false PLAIN=true
     - SONAR=false RUNSCANNER=false PLAIN=false BULK_TESTS=true
-    - SONAR-false RUNSCANNER=false PLAIN=false BULK_TESTS=false
+    - SONAR=false RUNSCANNER=false PLAIN=false BULK_TESTS=false
 
 git:
   depth: 3
