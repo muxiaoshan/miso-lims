@@ -10,9 +10,9 @@ env:
   matrix: 
     - SONAR=true
     - SONAR=false RUNSCANNER=true
-    - SONAR=false RUNSCANNER=false PLAIN=true TEST_PREFIX="Plain"
-    - SONAR=false RUNSCANNER=false PLAIN=false TEST_PREFIX="Bulk"
-    - SONAR-false RUNSCANNER=false PLAIN=false TEST_PREFIX='!'"Bulk"
+    - SONAR=false RUNSCANNER=false PLAIN=true
+    - SONAR=false RUNSCANNER=false PLAIN=false BULK_TESTS=true
+    - SONAR-false RUNSCANNER=false PLAIN=false BULK_TESTS=false
 
 git:
   depth: 3
@@ -49,14 +49,15 @@ script:
      elif ($RUNSCANNER); then
         pushd runscanner-illumina && ./build-illumina-interop && autoreconf -i && ./configure && make && popd;
         PATH=$PATH:$(pwd)/runscanner-illumina mvn clean -P external -Dmaven.javadoc.skip=true -DskipIllumina=false install;
-     else 
-        if ($PLAIN) ; then
-            mvn -P external clean verify -DrunPlainITs;
-        else
-            echo "test prefix ${TEST_PREFIX}"*;
-            mvn -P external clean verify -Dmaven.javadoc.skip=true -DskipITs=false -Dit.test="${TEST_PREFIX}"*;
-        fi
-    fi'
+     elif ($PLAIN); then
+        mvn -P external clean verify -DrunPlainITs;
+     elif ($BULK_TESTS); then
+        echo "test prefix ${TEST_PREFIX}"*;
+        mvn -P external clean verify -Dmaven.javadoc.skip=true -DskipITs=false -Dit.test=Bulk*;
+     else
+        echo "test prefix ${TEST_PREFIX}"*;
+        mvn -P external clean verify "-Dmaven.javadoc.skip=true -DskipITs=false -Dit.test=!Bulk*";
+     fi'
 
 
 cache:
