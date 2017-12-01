@@ -44,6 +44,8 @@ public interface BoxStore extends Store<Box>, Remover<Box>, PaginatedDataSource<
 
   BoxSize getSizeById(long id) throws IOException;
 
+  public List<Box> getBySearch(String search);
+
   Collection<BoxUse> listAllBoxUses() throws IOException;
   
   Collection<String> listAllBoxUsesStrings() throws IOException;

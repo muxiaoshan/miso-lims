@@ -164,6 +164,11 @@ public class DefaultBoxService implements BoxService, AuthorizedPaginatedDataSou
   }
 
   @Override
+  public List<Box> getBySearch(String search) {
+    return boxStore.getBySearch(search);
+  }
+
+  @Override
   public Collection<BoxSize> listSizes() throws IOException {
     return boxStore.listAllBoxSizes();
   }

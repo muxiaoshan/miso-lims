@@ -157,6 +157,22 @@ public class HibernateBoxDao implements BoxStore, HibernatePaginatedDataSource<B
   }
 
   @Override
+  public List<Box> getBySearch(String search) {
+    if (search == null) {
+      throw new NullPointerException("No search String provided");
+    }
+    Criteria criteria = currentSession().createCriteria(BoxImpl.class);
+    criteria.add(Restrictions.or(
+        Restrictions.eq("identificationBarcode", search),
+        Restrictions.eq("name", search),
+        Restrictions.eq("alias", search)
+        ));
+    @SuppressWarnings("unchecked")
+    List<Box> results = criteria.list();
+    return results;
+  }
+
+  @Override
   public Collection<BoxSize> listAllBoxSizes() throws IOException {
     Criteria criteria = currentSession().createCriteria(BoxSize.class);
     @SuppressWarnings("unchecked")

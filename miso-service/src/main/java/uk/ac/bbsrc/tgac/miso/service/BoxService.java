@@ -33,6 +33,8 @@ public interface BoxService extends PaginatedDataSource<Box> {
    */
   public Collection<BoxableView> getViewsFromBarcodeList(Collection<String> barcodeList) throws IOException;
 
+  public List<Box> getBySearch(String search);
+
   public Collection<BoxSize> listSizes() throws IOException;
 
   /**

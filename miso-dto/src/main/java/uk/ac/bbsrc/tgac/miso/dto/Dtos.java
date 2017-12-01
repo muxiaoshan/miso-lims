@@ -1186,6 +1186,12 @@ public class Dtos {
     return to;
   }
 
+  public static List<BoxDto> asBoxDtos(Collection<Box> boxes, boolean includeBoxables) {
+    return boxes.stream()
+        .map(box -> asDto(box, includeBoxables))
+        .collect(Collectors.toList());
+  }
+
   public static BoxDto asDto(Box from, boolean includeBoxables) {
     BoxDto dto = new BoxDto();
     dto.setId(from.getId());

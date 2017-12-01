@@ -177,6 +177,82 @@ HotTarget.sample = (function() {
           HotUtils.makeColumnForText('Matrix Barcode', !Constants.automaticBarcodes && !config.isLibraryReceipt, 'identificationBarcode', {
             validator: HotUtils.validator.optionalTextNoSpecialChars
           }),
+          {
+            header: 'Box Search',
+            data: 'boxSearch',
+            allowEmpty: true,
+            include: true,
+            unpack: function(sam, flat, setCellMeta) {
+
+            },
+            pack: function(sam, flat, errorHandler) {
+
+            }
+          },
+          {
+            header: 'Box Alias',
+            data: 'box',
+            type: 'dropdown',
+            allowEmpty: true,
+            include: true,
+            trimDropdown: false,
+            strict: true,
+            source: [],
+            unpack: function(sam, flat, setCellMeta) {
+
+            },
+            pack: function(sam, flat, errorHandler) {
+
+            },
+            depends: 'boxSearch',
+            update: function(sam, flat, value, setReadOnly, setOptions, setData) {
+              var deferred = jQuery.Deferred();
+              if (!value) {
+                // TODO: clear and return
+              }
+              jQuery.ajax({
+                url: '/miso/rest/boxes/search?' + jQuery.param({
+                  q: value
+                }),
+                contentType: "application/json; charset=utf8",
+                dataType: "json"
+              }).success(function(data) {
+                var cellOptions = {
+                  source: []
+                };
+                jQuery.each(data, function(index, item) {
+                  cellOptions.source.push(item.alias);
+                });
+                setOptions(cellOptions);
+                // TODO
+              }).fail(function(response, textStatus, serverStatus) {
+                HotUtils.showServerErrors(response, serverStatus);
+              }).always(function() {
+                deferred.resolve();
+              });
+              return deferred.promise();
+            }
+          },
+          {
+            header: 'Position',
+            data: 'boxPosition',
+            type: 'dropdown',
+            allowEmpty: true,
+            include: true,
+            trimDropdown: false,
+            strict: true,
+            source: [],
+            unpack: function(sam, flat, setCellMeta) {
+
+            },
+            pack: function(sam, flat, errorHandler) {
+
+            },
+            depends: 'box',
+            update: function(sam, flat, value, setReadOnly, setOptions, setData) {
+
+            }
+          },
           HotUtils.makeColumnForEnum('Sample Type', true, true, 'sampleType', Constants.sampleTypes, null),
           HotUtils.makeColumnForText('Sci. Name', true, 'scientificName', {
             validator: HotUtils.validator.requiredTextNoSpecialChars,
