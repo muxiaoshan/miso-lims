@@ -21,9 +21,10 @@
   ~
   ~ **********************************************************************
   --%>
+<%@ page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8" %>  
 <div id="maincontent">
     <div id="contentcolumn">
-        <h1>Dashboard</h1>
+        <h1>控制面板</h1>
         <%--
           <div id="alertbox">
             <fieldset class="alertwidget">
@@ -43,7 +44,7 @@
 
         <div class="dashboard_widget">
             <div class="widget_title ui-corner-top">
-                Project <input type="text" size="20" id="searchProject" name="searchProject"/>
+                项目 <input type="text" size="20" id="searchProject" name="searchProject"/>
             </div>
             <div class="widget ui-corner-bottom">
                 <div id="searchProjectresult">
@@ -54,7 +55,7 @@
         <div class="dashboard_widget">
 
             <div class="widget_title ui-corner-top">
-                Run <input type="text" size="20" id="searchRun" name="searchRun"/>
+                运行 <input type="text" size="20" id="searchRun" name="searchRun"/>
             </div>
             <div class="widget ui-corner-bottom">
                 <div id="searchRunresult"></div>
@@ -64,7 +65,7 @@
         <div class="dashboard_widget">
 
             <div class="widget_title ui-corner-top">
-                Sample <input type="text" size="20" id="searchSample" name="searchSample"/>
+                样本 <input type="text" size="20" id="searchSample" name="searchSample"/>
             </div>
             <div class="widget ui-corner-bottom">
                 <div id="searchSampleresult">
@@ -75,7 +76,7 @@
         <div class="dashboard_widget">
 
             <div class="widget_title ui-corner-top">
-                Library <input type="text" size="20" id="searchLibrary" name="searchLibrary"/>
+                库 <input type="text" size="20" id="searchLibrary" name="searchLibrary"/>
             </div>
             <div class="widget ui-corner-bottom">
                 <div id="searchLibraryresult">
